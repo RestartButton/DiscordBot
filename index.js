@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const config = require('./config.json');
 const fs = require('fs');
+const bd = require('./bd');
 
 const bot = new Discord.Client();
 const cooldowns = new Discord.Collection();
@@ -14,6 +15,7 @@ for(const file of commandFiles) {
 }
 
 bot.once('ready', () => {
+    bd.mysqlInit();
     console.info(`Logged in as ${bot.user.tag}!`);
     bot.user.setActivity(`${config.PREFIX}help`);
 });
